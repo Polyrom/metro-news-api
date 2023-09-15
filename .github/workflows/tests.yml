@@ -1,0 +1,29 @@
+name: tests
+
+on:
+  - push
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.11.4]
+
+    steps:
+      - uses: actions/checkout@v2
+      - name: set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v2
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: install poetry
+        run:  pip install poetry
+
+      - name: install dependencies
+        run:
+          poetry install
+
+      - name: run tests
+        run:
+          poetry run pytest
