@@ -1,5 +1,3 @@
-from typing import Generator
-
 from api import utils
 from api.models import NewsItem
 from db import sql_queries
@@ -47,4 +45,3 @@ class DBAdapter:
             )
             news_for_days.append(news_item)
         return news_for_days
-
