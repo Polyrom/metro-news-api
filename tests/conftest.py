@@ -1,11 +1,10 @@
-from dataclasses import dataclass
+from pydantic_settings import BaseSettings
 import pytest
 
 from api.db_adapter import DBAdapter
 
 
-@dataclass
-class FakeProjectSettings:
+class ProjectSettings(BaseSettings):
     host: str
     port: int
     sqlite_db: str
@@ -15,7 +14,7 @@ class FakeProjectSettings:
 def fake_project_settings(mocker):
     mock_project_settings = mocker.patch(
         'api.app.get_settings',
-        return_value=FakeProjectSettings(
+        return_value=ProjectSettings(
             host='fake_host',
             port=1111,
             sqlite_db='fake_db.db'
