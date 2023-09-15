@@ -14,7 +14,7 @@ class FakeProjectSettings:
 @pytest.fixture(autouse=True)
 def fake_project_settings(mocker):
     mock_project_settings = mocker.patch(
-        'settings.get_settings',
+        'api.app.get_settings',
         return_value=FakeProjectSettings(
             host='fake_host',
             port=1111,
