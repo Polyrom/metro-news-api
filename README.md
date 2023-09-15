@@ -1,4 +1,4 @@
-[![flake8](https://github.com/Polyrom/metro-news-api/actions/workflows/linter.yml/badge.svg)]
+![flake8](https://github.com/Polyrom/metro-news-api/actions/workflows/linter.yml/badge.svg)
 
 ### Описание
 Сервис парсит новости со страницы `http://mosday.ru/news/tags.php?metro` 
