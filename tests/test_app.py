@@ -15,7 +15,11 @@ class FakeProjectSettings(BaseSettings):
 
 
 def get_fake_settings():
-    return FakeProjectSettings()
+    return FakeProjectSettings(
+        host='fake_host',
+        port=9999,
+        sqlite_db='fake.db'
+    )
 
 
 app.dependency_overrides[ProjectSettings] = get_fake_settings
