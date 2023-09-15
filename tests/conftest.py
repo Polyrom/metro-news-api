@@ -1,6 +1,27 @@
+from dataclasses import dataclass
 import pytest
 
 from api.db_adapter import DBAdapter
+
+
+@dataclass
+class FakeProjectSettings:
+    host: str
+    port: int
+    sqlite_db: str
+
+
+@pytest.fixture(autouse=True)
+def fake_project_settings(mocker):
+    mock_project_settings = mocker.patch(
+        'settings.get_settings',
+        return_value=FakeProjectSettings(
+            host='fake_host',
+            port=1111,
+            sqlite_db='fake_db.db'
+        )
+    )
+    yield mock_project_settings
 
 
 @pytest.fixture(autouse=True)
