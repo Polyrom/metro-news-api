@@ -9,7 +9,7 @@ from api.utils import (calculate_date_since_days,
 @pytest.fixture()
 def fake_datetime_now(mocker):
     mock_dt = mocker.patch(
-        'api.app.utils.datetime'
+        'api.db_adapter.utils.datetime'
     )
     mock_dt.now.return_value = datetime.datetime(2023, 9, 14)
     yield mock_dt
