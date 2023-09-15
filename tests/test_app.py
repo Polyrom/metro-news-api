@@ -2,8 +2,7 @@ from fastapi.testclient import TestClient
 from pydantic_settings import BaseSettings
 
 from api.app import app
-from settings import ProjectSettings
-
+from settings import get_settings
 
 client = TestClient(app)
 
@@ -22,7 +21,7 @@ def get_fake_settings():
     )
 
 
-app.dependency_overrides[ProjectSettings] = get_fake_settings
+app.dependency_overrides[get_settings] = get_fake_settings
 
 
 def test_get_news():
