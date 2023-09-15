@@ -1,26 +1,6 @@
-from pydantic_settings import BaseSettings
 import pytest
 
 from api.db_adapter import DBAdapter
-
-
-class ProjectSettings(BaseSettings):
-    host: str
-    port: int
-    sqlite_db: str
-
-
-@pytest.fixture(autouse=True)
-def fake_project_settings(mocker):
-    mock_project_settings = mocker.patch(
-        'api.app.get_settings',
-        return_value=ProjectSettings(
-            host='fake_host',
-            port=1111,
-            sqlite_db='fake_db.db'
-        )
-    )
-    yield mock_project_settings
 
 
 @pytest.fixture(autouse=True)
