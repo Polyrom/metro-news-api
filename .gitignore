@@ -129,3 +129,6 @@ cython_debug/
 
 # IDEA files
 .idea
+
+#SQLite
+*.db
