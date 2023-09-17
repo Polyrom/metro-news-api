@@ -1,18 +1,16 @@
-from typing_extensions import Annotated
-
 from fastapi import Depends, FastAPI
-from fastapi.responses import JSONResponse
+from sqlalchemy.orm import Session
 
+from api import utils, schemas
 from api.db_adapter import DBAdapter
-from settings import get_settings, ProjectSettings
+from db.database import get_db
 
 app = FastAPI()
 
 
-@app.get('/metro/news')
-def get_news(settings: Annotated[ProjectSettings, Depends(get_settings)],
-             day: int = 1):
-    db_adapter = DBAdapter(settings)
-    news = db_adapter.get_news_for_days(day)
-    response = [news_item.model_dump() for news_item in news]
-    return JSONResponse(content=response)
+@app.get('/metro/news', response_model=list[schemas.NewsItemBase])
+def get_news_new(db: Session = Depends(get_db),
+                 day: int = 1):
+    date_from = utils.calculate_date_since(day)
+    response = DBAdapter(db).get_news_since_date(date_from)
+    return response

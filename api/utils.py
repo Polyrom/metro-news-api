@@ -1,20 +1,19 @@
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 
 
-def calculate_date_since_days(days: int) -> str:
+def calculate_date_since(days: int) -> date:
     """
     Calculates date for the defined number of days ago
     :param days: number of days
-    :return: date in format YYYY-mm-dd
+    :return: date object
     """
-    return (datetime.now() - timedelta(days=days)).strftime("%Y-%m-%d")
+    return (datetime.now() - timedelta(days=days)).date()
 
 
-def normalize_date_for_response(date: str) -> str:
+def convert_date_to_ymd(date_to_format: datetime) -> str:
     """
-    Formats date string dd.mm.YYYY into YYYY-mm-dd
-    :param date: date string dd.mm.YYYY
-    :return: date string YYYY-mm-dd
+    Converts datetime to YYYY-mm-dd format
+    :param date_to_format: datetime object
+    :return: formatted datetime string
     """
-    parsed_date = datetime.strptime(date, '%d.%m.%Y')
-    return parsed_date.strftime('%Y-%m-%d')
+    return datetime.strftime(date_to_format, '%Y-%m-%d')

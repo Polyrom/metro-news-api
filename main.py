@@ -3,11 +3,10 @@ import asyncio
 import uvicorn
 
 from api.app import app
-from db.database import DataBase
+from db import db_models
+from db.database import engine, get_db
 from news_parser.parser import MetroNewsParser
 from settings import get_settings
-
-project_settings = get_settings()
 
 
 def shutdown(parser_instance: MetroNewsParser, loop):
@@ -24,11 +23,12 @@ async def create_and_gather_tasks(parser: MetroNewsParser, server: uvicorn.Serve
 
 
 if __name__ == '__main__':
+    project_settings = get_settings()
     # initialize database
-    db = DataBase(project_settings.sqlite_db)
-    db.startup()
+    db = get_db()
+    db_models.Base.metadata.create_all(bind=engine)
     # initialize parser task
-    parser = MetroNewsParser(project_settings)
+    parser = MetroNewsParser(db)
     # initialize server task
     server_config = uvicorn.Config(
         app=app,
