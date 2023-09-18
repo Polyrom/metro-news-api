@@ -1,27 +1,16 @@
 from fastapi.testclient import TestClient
-from pydantic_settings import BaseSettings
 
 from api.app import app
-from settings import get_settings
+from db.database import get_db
 
 client = TestClient(app)
 
 
-class FakeProjectSettings(BaseSettings):
-    host: str
-    port: int
-    sqlite_db: str
+def get_fake_db():
+    return None
 
 
-def get_fake_settings():
-    return FakeProjectSettings(
-        host='fake_host',
-        port=9999,
-        database_url='fake_db'
-    )
-
-
-app.dependency_overrides[get_settings] = get_fake_settings
+app.dependency_overrides[get_db] = get_fake_db
 
 
 def test_get_news():
