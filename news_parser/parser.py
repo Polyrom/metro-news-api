@@ -99,7 +99,7 @@ class MetroNewsParser:
         while self.task_active:
             news = await self.parse_news()
             self._persist_news_to_db(news)
-            await asyncio.sleep(30)
+            await asyncio.sleep(600)
 
     def stop_periodic_parsing(self) -> None:
         self.task_active = False
