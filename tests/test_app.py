@@ -17,7 +17,7 @@ def get_fake_settings():
     return FakeProjectSettings(
         host='fake_host',
         port=9999,
-        sqlite_db='fake.db'
+        database_url='fake_db'
     )
 
 
