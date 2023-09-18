@@ -132,6 +132,3 @@ cython_debug/
 
 # SQLite dev DB
 *.db
-
-# Alembic ini
-alembic.ini
