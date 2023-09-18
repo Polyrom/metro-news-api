@@ -19,4 +19,8 @@ class DBAdapter:
         :param date_from: start date
         :return: a list of news items
         """
-        return self.db.query(db_models.NewsItem).filter(db_models.NewsItem.date_published >= date_from).all()
+        return self.db.query(
+            db_models.NewsItem
+        ).filter(
+            db_models.NewsItem.date_published >= date_from
+        ).all()

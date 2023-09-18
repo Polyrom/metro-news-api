@@ -3,8 +3,7 @@ import asyncio
 import uvicorn
 
 from api.app import app
-from db import db_models
-from db.database import engine, get_db
+from db.database import get_db
 from news_parser.parser import MetroNewsParser
 from settings import get_settings
 
@@ -24,9 +23,7 @@ async def create_and_gather_tasks(parser: MetroNewsParser, server: uvicorn.Serve
 
 if __name__ == '__main__':
     project_settings = get_settings()
-    # initialize database
     db = get_db()
-    db_models.Base.metadata.create_all(bind=engine)
     # initialize parser task
     parser = MetroNewsParser(db)
     # initialize server task

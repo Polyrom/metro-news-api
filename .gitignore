@@ -130,5 +130,8 @@ cython_debug/
 # IDEA files
 .idea
 
-#SQLite
+# SQLite dev DB
 *.db
+
+# Alembic ini
+alembic.ini

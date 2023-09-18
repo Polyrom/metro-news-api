@@ -1,10 +1,12 @@
 from sqlalchemy import Column, Integer, String, DATE, UniqueConstraint
+from sqlalchemy.ext.declarative import declarative_base
 
-from db.database import Base
+
+Base = declarative_base()
 
 
 class NewsItem(Base):
-    __tablename__ = 'metro_news_new'
+    __tablename__ = 'metro_news'
 
     id = Column(Integer, primary_key=True, index=True)
     headline = Column(String)

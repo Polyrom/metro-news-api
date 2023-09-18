@@ -6,7 +6,7 @@ from pydantic_settings import BaseSettings, SettingsConfigDict
 class ProjectSettings(BaseSettings):
     host: str
     port: int
-    sqlite_db: str
+    database_url: str
 
     model_config = SettingsConfigDict(env_file='.env')
 
